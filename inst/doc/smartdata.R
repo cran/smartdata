@@ -53,9 +53,9 @@ data(ecoli1, package = "imbalance")
 super_ecoli <- space_transformation(ecoli1, "lle_knn", k = 3, num_features = 2,
                                    regularization = 1, exclude = c("Mcg", "Alm1"))
 
-## ------------------------------------------------------------------------
-super_iris <- clean_outliers(iris, method = "multivariate", type = "adj")
-super_iris <- clean_outliers(iris, method = "univariate", type = "z", fill = "mean")
+## ---- eval = FALSE-------------------------------------------------------
+#  super_iris <- clean_outliers(iris, method = "multivariate", type = "adj")
+#  super_iris <- clean_outliers(iris, method = "univariate", type = "z", fill = "mean")
 
 ## ------------------------------------------------------------------------
 data(nhanes, package = "mice")
