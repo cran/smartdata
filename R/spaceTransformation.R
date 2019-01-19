@@ -64,7 +64,7 @@ args.adaptative_gpca <- list(
       if(class(x) != "matrix")
         stop("similarity parameter needs a matrix of similarities of the dataset variabless")
     },
-    info    = "A p \times p similarity matrix on the variables defining an inner product on the rows of X",
+    info    = "An square similarity matrix on the variables defining an inner product on the rows of X",
     map     = "Q"
   ),
   num_features = list(
@@ -87,10 +87,11 @@ doSpaceTransformation.lle <- function(task){
     callArgs <- c(callArgs, list(nnk = FALSE))
   }
 
-  dataset    <- task$dataset
+  dataset <- task$dataset
 
   callArgs <- c(list(X = dataset), callArgs)
   result <- do.call(method, callArgs)$Y
+  result <- data.frame(result)
 
   result
 }
@@ -105,7 +106,7 @@ doSpaceTransformation.adaptiveGPCA <- function(task){
 
   callArgs <- c(list(X = as.matrix(dataset)), callArgs)
   result <- do.call(method, callArgs)$U
-  result <- data.frame(result)
+  result <- as.data.frame(result)
 
   result
 }
@@ -156,7 +157,11 @@ space_transformation <- function(dataset, method, exclude = NULL, ...){
   task   <- preprocessingTask(dataset, "spaceTransformation", method, NULL, ...)
   result <- preprocess(task)
 
+  # Binds dataset with excluded columns and adjusts names,
+  # preserving the ones for the excluded columns
+  newNames <- colnames(result)
   result <- cbind(result, orig_dataset[, exclude])
+  colnames(result) <- c(newNames, exclude)
 
   result
 }

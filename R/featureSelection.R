@@ -68,8 +68,8 @@ args.Boruta <- list(
 )
 
 args.chi_squared <- list(
-  num_attrs = list(
-    check   = Curry(qexpect, rules = "X1[1,Inf)", label = "num_attrs"),
+  num_features = list(
+    check   = Curry(qexpect, rules = "X1[1,Inf)", label = "num_features"),
     info    = paste("Number of attributes to pick (apart from class_attr, if supplied).",
                     "Should be lower than number of features in the dataset"),
     default = 1
@@ -82,8 +82,8 @@ args.sym_uncertainty <- args.chi_squared
 args.oneR <- args.chi_squared
 
 args.RF_importance <- list(
-  num_attrs = list(
-    check   = Curry(qexpect, rules = "X1[1,Inf)", label = "num_attrs"),
+  num_features = list(
+    check   = Curry(qexpect, rules = "X1[1,Inf)", label = "num_features"),
     info    = paste("Number of attributes to pick. Should be lower than number of",
                     "features in the dataset"),
     default = 1
@@ -159,13 +159,14 @@ doFeatSelection.FSelector <- function(task){
     whichNonNumeric <- which(! original_attrs %in% pick_attrs)
     nonNumeric <- original_attrs[whichNonNumeric]
     # Strip dataset from non continuous attributes, except from class
-    dataset <- dataset[, -whichNonNumeric]
+    if (length(whichNonNumeric) > 0)
+      dataset <- dataset[, -whichNonNumeric]
   } else{
     nonNumeric <- c()
   }
 
-  num_attrs <- callArgs$num_attrs
-  callArgs <- callArgs[names(callArgs) != "num_attrs"]
+  num_features <- callArgs$num_features
+  callArgs <- callArgs[names(callArgs) != "num_features"]
 
   if(task$method %in% c("best_first_search", "backward_search",
                          "forward_search", "hill_climbing")){
@@ -185,7 +186,7 @@ doFeatSelection.FSelector <- function(task){
       attrs <- do.call(method, args)
     } else{
       weights <- do.call(method, args)
-      attrs <- FSelector::cutoff.k(weights, num_attrs)
+      attrs <- FSelector::cutoff.k(weights, num_features)
     }
   }
 
@@ -237,18 +238,18 @@ doFeatSelection.FSelector <- function(task){
 #'
 #' super_iris <- feature_selection(iris, "Boruta", class_attr = "Species")
 #' super_iris <- feature_selection(iris, "chi_squared",
-#'                                 class_attr = "Species", num_attrs = 3)
+#'                                 class_attr = "Species", num_features = 3)
 #' # Pick 3 attributes from the continuous ones
 #' super_ecoli <- feature_selection(ecoli1, "information_gain",
-#'                                  class_attr = "Class", num_attrs = 3)
+#'                                  class_attr = "Class", num_features = 3)
 #' super_ecoli <- feature_selection(ecoli1, "gain_ratio",
-#'                                  class_attr = "Class", num_attrs = 3)
+#'                                  class_attr = "Class", num_features = 3)
 #' super_ecoli <- feature_selection(ecoli1, "sym_uncertainty",
-#'                                  class_attr = "Class", num_attrs = 3)
+#'                                  class_attr = "Class", num_features = 3)
 #' super_votes <- feature_selection(HouseVotes84, "oneR", exclude = c("V1", "V2"),
-#'                                  class_attr = "Class", num_attrs = 3)
+#'                                  class_attr = "Class", num_features = 3)
 #' super_votes <- feature_selection(iris, "RF_importance", class_attr = "Species",
-#'                                  num_attrs = 3, type = 2)
+#'                                  num_features = 3, type = 2)
 #' \donttest{
 #' super_iris  <- feature_selection(iris, "best_first_search", exclude = "Species",
 #'                                  eval_fun = evaluator)
@@ -269,7 +270,6 @@ feature_selection <- function(dataset, method, class_attr = NULL,
 
   method   <- matchArg(method, featSelectionMethods)
   colnames <- names(dataset)
-  coltypes <- colTypes(dataset)
 
   if(length(exclude) > 0){
     dataset <- dataset[, -which(colnames %in% exclude)]

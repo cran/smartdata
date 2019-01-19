@@ -1,6 +1,6 @@
 Package: smartdata
 Title: Data Preprocessing
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
    person("Ignacio", "Cordón", email = "nacho.cordon.castillo@gmail.com", role = c("aut", "cre")),
    person("Francisco", "Charte", email = "francisco@fcharte.com", role = "aut"),
@@ -26,11 +26,11 @@ URL: http://github.com/ncordon/smartdata
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2019-01-07 04:41:32 UTC; nuwanda
+Packaged: 2019-01-19 12:31:07 UTC; nuwanda
 Author: Ignacio Cordón [aut, cre],
   Francisco Charte [aut],
   Julián Luengo [aut],
   Salvador García [aut],
   Francisco Herrera [aut]
 Repository: CRAN
-Date/Publication: 2019-01-07 16:40:17 UTC
+Date/Publication: 2019-01-19 13:00:03 UTC
