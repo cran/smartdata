@@ -1,17 +1,17 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ---- echo = FALSE, include = FALSE--------------------------------------
+## ---- echo = FALSE, include = FALSE-------------------------------------------
 library(smartdata)
 
-## ----options_method------------------------------------------------------
+## ----options_method-----------------------------------------------------------
 which_options("instance_selection")
 which_options("instance_selection", "multiedit")
 
-## ----preprocess, eval = FALSE--------------------------------------------
+## ----preprocess, eval = FALSE-------------------------------------------------
 #  preprocess <- function(task){
 #    UseMethod("preprocess")
 #  }
@@ -22,7 +22,7 @@ which_options("instance_selection", "multiedit")
 #    doInstSelection(task)
 #  }
 
-## ----wrapper-packages, eval = FALSE--------------------------------------
+## ----wrapper-packages, eval = FALSE-------------------------------------------
 #  instSelectionPackages <- list(
 #    "CNN" = list(
 #      pkg = "unbalanced",
@@ -41,10 +41,10 @@ which_options("instance_selection", "multiedit")
 #    )
 #  )
 
-## ----wrapper-methods, eval = FALSE---------------------------------------
+## ----wrapper-methods, eval = FALSE--------------------------------------------
 #  instSelectionMethods <- names(instSelectionPackages)
 
-## ----method-args, eval = FALSE-------------------------------------------
+## ----method-args, eval = FALSE------------------------------------------------
 #  args.multiedit <- list(
 #    k = list(
 #      check = Curry(qexpect, rules = "X1[1,Inf)", label = "k"),
@@ -65,7 +65,7 @@ which_options("instance_selection", "multiedit")
 #    )
 #  )
 
-## ----resolve-method, eval = FALSE----------------------------------------
+## ----resolve-method, eval = FALSE---------------------------------------------
 #  doInstSelection.unbalanced <- function(task){
 #    callArgs <- eval(parse(text = paste("args.", task$method, sep = "")))
 #    callArgs <- mapArguments(task$args, callArgs)
@@ -99,7 +99,7 @@ which_options("instance_selection", "multiedit")
 #    result
 #  }
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  instance_selection <- function(dataset, method, class_attr = "Class", ...){
 #    classAttr <- class_attr
 #    checkDataset(dataset)

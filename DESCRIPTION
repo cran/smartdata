@@ -1,6 +1,6 @@
 Package: smartdata
 Title: Data Preprocessing
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: c(
    person("Ignacio", "Cordón", email = "nacho.cordon.castillo@gmail.com", role = c("aut", "cre")),
    person("Francisco", "Charte", email = "francisco@fcharte.com", role = "aut"),
@@ -12,7 +12,7 @@ Maintainer: Ignacio Cordón <nacho.cordon.castillo@gmail.com>
 Description: Eases data preprocessing tasks, providing a data flow based 
    on a pipe operator which eases cleansing, transformation, oversampling, 
    or instance/feature selection operations.
-Depends: R (>= 3.4.0), mice (>= 2.46.0)
+Depends: R (>= 3.5.0), mice (>= 2.46.0)
 Imports: functional, checkmate, magrittr, infotheo, MVN, adaptiveGPCA,
         discretization, outliers, NoiseFiltersR, Boruta, FSelector,
         lle, unbalanced, RoughSets, class, clusterSim, Amelia,
@@ -23,14 +23,14 @@ Encoding: UTF-8
 LazyData: true
 BugReports: http://github.com/ncordon/smartdata/issues
 URL: http://github.com/ncordon/smartdata
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2019-01-19 12:31:07 UTC; nuwanda
+Packaged: 2019-12-18 02:27:56 UTC; nuwanda
 Author: Ignacio Cordón [aut, cre],
   Francisco Charte [aut],
   Julián Luengo [aut],
   Salvador García [aut],
   Francisco Herrera [aut]
 Repository: CRAN
-Date/Publication: 2019-01-19 13:00:03 UTC
+Date/Publication: 2019-12-18 17:40:02 UTC
